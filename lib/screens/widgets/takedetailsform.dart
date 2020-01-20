@@ -8,14 +8,36 @@ class TakeDatailsForm extends StatelessWidget {
   final Function delete;
 
   final SaveToHive box;
-  TakeDatailsForm({this.intex, this.cgpabox, this.delete, this.box});
+TakeDatailsForm({this.intex, this.cgpabox, this.delete, this.box});
+ 
   @override
   Widget build(BuildContext context) {
+    print(cgpabox);
+    var me=this;
     final _formKey = GlobalKey<FormState>();
     // String course;
     // double cgpa;
     // double credits;
+    final cgpaController=TextEditingController();
+    final courseController=TextEditingController();
+    final creditController=TextEditingController();
+/*
+//bypass technic to get value of text field
+//to get completed value use focusnode listener;
+    creditController.addListener((){
 
+print('@controller'+creditController.text);
+
+                    me.cgpabox.putAt(intex, SaveToHive(course: creditController.text)).then((value){
+                      print("saved");
+                    }).catchError((error){
+                      print(error);
+                    });
+                    print(box.course);
+
+    
+    });
+*/
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -29,9 +51,13 @@ class TakeDatailsForm extends StatelessWidget {
                       hintText: 'COURSE', border: InputBorder.none),
                   onChanged: (v) {
                     //course = v;
-                    cgpabox.putAt(intex, SaveToHive(course: v));
+                    cgpabox.putAt(intex, SaveToHive(course: v)).then((value){
+                      print("saved");
+                    }).catchError((error){
+                      print(error);
+                    });
                     print(box.course);
-                    print(v);
+                    print('@changed'+v);
                   },
                 ),
               ),
@@ -52,9 +78,20 @@ class TakeDatailsForm extends StatelessWidget {
                       return null;
                     }
                   },
+                  controller: creditController,
                   onChanged: (v) {
                     // credits = double.parse(v);
-                    cgpabox.putAt(intex, SaveToHive(credits: double.parse(v)));
+                    print(v);
+                  /* 
+                  //occuring problem by changing state;
+                   cgpabox.putAt(intex, SaveToHive(credits: double.parse(v))).then((value){
+                        print("value saved");
+
+                    }).catchError((error){
+                      print(error.toString());
+
+                    })    ;
+                    */
                   },
                 ),
               ),
