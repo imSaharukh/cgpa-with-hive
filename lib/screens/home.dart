@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: (context, i) {
                       print(i);
                       final som = cgpaBox.getAt(i) as SaveToHive;
+                     // print(som);
                       // gethivedata({fcourse, fcgpa, fcredits}) {
                       //   if (fcourse != null) {
                       //     return som.course;
@@ -63,6 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       return TakeDatailsForm(
                         intex: i,
                         delete: hivedelete,
+                        //cgpabox was not passed as parameter
+                        cgpabox: cgpaBox,
                         box: som,
                       );
                     },
